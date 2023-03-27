@@ -60,12 +60,14 @@ function moviesAverageByCategory(array, category) {
 function hoursToMinutes(array) {
   let result = array.map(item => {
     const num = (item.duration.replace('h', '').replace('min', '')).split(' ');
-    const hours = (parseFloat(num[0]))*60;
-    const mins = parseFloat(num[1]);
-    const onlyMins = mins ? hours + mins : hours
+    const hours = (Number(num[0]))*60;
+    const mins = Number(num[1]);
+    let onlyMins;
+    if(isNaN(mins)){onlyMins = hours}
+    else {onlyMins = hours + mins};
 
-    return {...item, duration: onlyMins}
-  })
+    return {...item, duration: onlyMins};
+  });
   console.log("EXERCISE 7 ->", result);
   return result;
 }
